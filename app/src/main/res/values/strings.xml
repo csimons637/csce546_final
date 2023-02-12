@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">csce546_final_Yahtzee</string>
+    <string name="roll">Roll</string>
+    <string name="result">Result</string>
 </resources>
