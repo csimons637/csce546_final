@@ -11,11 +11,11 @@
     * ViewModels
 * User Interaction
     * Buttons
-    * Input (Like, a shake sensor for rolling)
+    * Input (A shake sensor for rolling the dice)
 * Hardware Interaction
-    * Use altimeter/gyros to detect shaking
+    * Use altimeter/gyros to detect shaking input
 * Technology Stack
     * Kotlin
     * Android Studio
     * Gradle
-    * Unit Tests
+    * Unit Tests (possibly)
