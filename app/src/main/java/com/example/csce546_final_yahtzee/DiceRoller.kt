@@ -1,5 +1,9 @@
 package com.example.csce546_final_yahtzee
 
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -8,14 +12,40 @@ import androidx.appcompat.app.AppCompatActivity
 /**
  * Activity allows users to roll five dice for a Yahtzee style game
  */
-class DiceRoller : AppCompatActivity() {
+class DiceRoller : AppCompatActivity(), SensorEventListener {
+    private lateinit var sensorManager: SensorManager
+    private var shake: Sensor? = null
+    private var accel1: Float? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dice_roller)
-
+        setUpSensor()
         val roll: Button = findViewById(R.id.roll_button)
         roll.setOnClickListener{rollDice()}
     }
+
+    /**
+     * Sets up the accelerometer
+     */
+    private fun setUpSensor() {
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        shake = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    }
+    /**onSensorChanged()
+            rollDice()
+     * Listens for changes in sensor value
+     */
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
+            accel1 = event.values[0]
+            rollDice()
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        return
+    }
+
 
     /**
      * Rolls each of five dice
